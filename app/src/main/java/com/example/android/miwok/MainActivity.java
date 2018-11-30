@@ -16,83 +16,137 @@
 package com.example.android.miwok;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {//implements TabLayout.OnTabSelectedListener {
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    /*private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageSelected(int position) {
+            // on changing the page
+            // make respected tab selected
+            tabLayout.setScrollPosition(position, 0, true);
+//            tabLayout.setSelected(true);  // Don't use this line, it highlights all tabs for the first page selected!!!
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+        }
+    };*/
+
+//    private TabLayout.OnTabSelectedListener onTabSelectedListener = new TabLayout.OnTabSelectedListener() {
+//        @Override
+//        public void onTabSelected(TabLayout.Tab tab) {
+//            viewPager.setCurrentItem(tab.getPosition());
+//        }
+//
+//        @Override
+//        public void onTabUnselected(TabLayout.Tab tab) {
+//        }
+//
+//        @Override
+//        public void onTabReselected(TabLayout.Tab tab) {
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_category);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+//        viewPager.removeOnPageChangeListener(onPageChangeListener);
+//        viewPager.addOnPageChangeListener(onPageChangeListener);
 
-        // Set the content of the activity to use the activity_main.xml layout file
-        setContentView(R.layout.activity_main);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setTabTextColors(Color.parseColor("#A8A19E"), Color.parseColor("#FFFFFF"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
+//        tabLayout.removeOnTabSelectedListener(onTabSelectedListener);
+//        tabLayout.addOnTabSelectedListener(onTabSelectedListener);
+//        tabLayout.setOnTabSelectedListener(this);
+        tabLayout.setupWithViewPager(viewPager);
 
-        // Find the View that shows the numbers category
-        TextView numbers = (TextView) findViewById(R.id.numbers);
-
-        // Set a click listener on that View
-        numbers.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the numbers category is clicked on.
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link NumbersActivity}
-                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
-
-                // Start the new activity
-                startActivity(numbersIntent);
-            }
-        });
-
-        // Find the View that shows the family category
-        TextView family = (TextView) findViewById(R.id.family);
-
-        // Set a click listener on that View
-        family.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the family category is clicked on.
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link FamilyActivity}
-                Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
-
-                // Start the new activity
-                startActivity(familyIntent);
-            }
-        });
-
-        // Find the View that shows the colors category
-        TextView colors = (TextView) findViewById(R.id.colors);
-
-        // Set a click listener on that View
-        colors.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the colors category is clicked on.
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link ColorsActivity}
-                Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
-
-                // Start the new activity
-                startActivity(colorsIntent);
-            }
-        });
-
-        // Find the View that shows the phrases category
-        TextView phrases = (TextView) findViewById(R.id.phrases);
-
-        // Set a click listener on that View
-        phrases.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the phrases category is clicked on.
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link PhrasesActivity}
-                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
-
-                // Start the new activity
-                startActivity(phrasesIntent);
-            }
-        });
+//        TextView numbers = findViewById(R.id.numbers);
+//        numbers.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(MainActivity.this, NumbersActivity.class);
+//                startActivity(i);
+//            }
+//        });
+//        TextView family = findViewById(R.id.family);
+//        family.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(MainActivity.this, FamilyActivity.class);
+//                startActivity(i);
+//            }
+//        });
+//        TextView colors = findViewById(R.id.colors);
+//        colors.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(MainActivity.this, ColorsActivity.class);
+//                startActivity(i);
+//            }
+//        });
+//        TextView phrases = findViewById(R.id.phrases);
+//        phrases.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(MainActivity.this, PhrasesActivity.class);
+//                startActivity(i);
+//            }
+//        });
     }
+
+    /*@Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }*/
 }
+//    public void openNumbersList(View view) {
+//        Intent i = new Intent(this, NumbersActivity.class);
+//        startActivity(i);
+//    }
+//
+//    public void openFamilyList(View view) {
+//        Intent i = new Intent(this, FamilyActivity.class);
+//        startActivity(i);
+//    }
+//
+//    public void openColorsList(View view) {
+//        Intent i = new Intent(this, ColorsActivity.class);
+//        startActivity(i);
+//    }
+//
+//    public void openNPhrasesList(View view) {
+//        Intent i = new Intent(this, PhrasesActivity.class);
+//        startActivity(i);
+//    }
